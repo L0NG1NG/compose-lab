@@ -23,7 +23,6 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import com.longing.awesomeview.ui.shape.CircularHoleShape
 
-
 @Composable
 fun HoleAnimationImage(
     bitmap: ImageBitmap,

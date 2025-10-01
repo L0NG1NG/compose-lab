@@ -13,6 +13,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.longing.awesomeview.ui.main.NavigationItems
+import com.longing.awesomeview.ui.main.home.HomeScreen
 
 @Composable
 fun AwesomeViewNavGraph(modifier: Modifier = Modifier, navController: NavHostController) {
@@ -22,7 +23,7 @@ fun AwesomeViewNavGraph(modifier: Modifier = Modifier, navController: NavHostCon
         modifier = modifier
     ) {
         composable(NavigationItems.Home.route) {
-            ScreenContent(NavigationItems.Home.title)
+            HomeScreen()
         }
 
         composable(NavigationItems.Feature1.route) {
