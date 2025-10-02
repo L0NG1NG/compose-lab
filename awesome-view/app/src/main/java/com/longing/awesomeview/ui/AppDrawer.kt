@@ -26,7 +26,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.unit.dp
 import com.longing.awesomeview.R
-import com.longing.awesomeview.ui.views.HoleAnimationImage
+import com.longing.awesomeview.ui.components.HoleAnimationImage
 
 data class NavigationItem(
     val title: String,

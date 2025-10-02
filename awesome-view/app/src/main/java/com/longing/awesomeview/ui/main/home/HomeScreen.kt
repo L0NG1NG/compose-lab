@@ -14,7 +14,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.longing.awesomeview.ui.views.CircleLoader
+import com.longing.awesomeview.ui.components.AnimatedGenderSign
+import com.longing.awesomeview.ui.components.CircleLoader
+import com.longing.awesomeview.ui.components.GenderSign
 
 @Composable
 fun HomeScreen() {
@@ -24,29 +26,44 @@ fun HomeScreen() {
             .fillMaxSize()
             .padding(8.dp)
     ) {
-        val (circleLoaderOuter, circleLoaderInner, startButton) = createRefs()
-        CircleLoader(modifier = Modifier
-            .constrainAs(circleLoaderOuter) {
-                top.linkTo(parent.top)
-                start.linkTo(parent.start)
-            }
-            .size(80.dp),
+        val (circleLoaderOuter, circleLoaderInner, startButton, genderSign) = createRefs()
+        CircleLoader(
+            modifier = Modifier
+                .constrainAs(circleLoaderOuter) {
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
+                }
+                .size(80.dp),
             color = MaterialTheme.colorScheme.primary,
             secondColor = MaterialTheme.colorScheme.secondary,
             isVisible = isStart)
 
-        CircleLoader(modifier = Modifier
-            .constrainAs(circleLoaderInner) {
-                top.linkTo(circleLoaderOuter.top)
-                start.linkTo(circleLoaderOuter.start)
-                bottom.linkTo(circleLoaderOuter.bottom)
-                end.linkTo(circleLoaderOuter.end)
-            }
-            .size(40.dp),
+        CircleLoader(
+            modifier = Modifier
+                .constrainAs(circleLoaderInner) {
+                    top.linkTo(circleLoaderOuter.top)
+                    start.linkTo(circleLoaderOuter.start)
+                    bottom.linkTo(circleLoaderOuter.bottom)
+                    end.linkTo(circleLoaderOuter.end)
+                }
+                .size(40.dp),
             color = MaterialTheme.colorScheme.tertiary,
             secondColor = null,
             tailLength = 280f,
             isVisible = isStart)
+
+        AnimatedGenderSign(
+            modifier = Modifier
+                .constrainAs(genderSign) {
+                    top.linkTo(circleLoaderOuter.top)
+                    start.linkTo(circleLoaderOuter.end, margin = 8.dp)
+                    bottom.linkTo(circleLoaderOuter.bottom)
+
+                }
+                .size(80.dp),
+            genderSign = if (isStart) GenderSign.MALE else GenderSign.FEMALE,
+            strokeWidth = 6.dp
+        )
 
         Button(modifier = Modifier.constrainAs(startButton) {
             bottom.linkTo(parent.bottom)

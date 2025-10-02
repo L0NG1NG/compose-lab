@@ -1,4 +1,4 @@
-package com.longing.awesomeview.ui.views
+package com.longing.awesomeview.ui.components
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing
