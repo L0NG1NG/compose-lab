@@ -26,6 +26,7 @@ import com.longing.awesomeview.ui.components.AnimatedGenderSign
 import com.longing.awesomeview.ui.components.CircleLoader
 import com.longing.awesomeview.ui.components.GenderSign
 import com.longing.awesomeview.ui.components.RainbowLoader
+import com.longing.awesomeview.ui.components.TypewriteText
 
 @Composable
 fun HomeScreen() {
@@ -95,7 +96,7 @@ fun HomeScreen() {
             start.linkTo(parent.start)
             end.linkTo(parent.end)
         }, onClick = { isStart = !isStart }) {
-            Text(text = if (isStart) "Stop" else "Start")
+            TypewriteText(text = if (isStart) "Stop" else "Start", speed = 60)
         }
     }
 }
