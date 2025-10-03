@@ -102,7 +102,7 @@ fun MainScreen() {
 
 object NavigationItems {
     val Home = NavigationItem(
-        title = "首页",
+        title = "来自Kotlin社区",
         icon = Icons.Default.Home,
         route = "home"
     )
