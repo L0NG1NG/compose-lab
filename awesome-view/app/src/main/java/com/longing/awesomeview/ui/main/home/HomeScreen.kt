@@ -29,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -37,7 +38,9 @@ import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.longing.awesomeview.ui.components.AnimatedGenderSign
+import com.longing.awesomeview.ui.components.BadgeCorner
 import com.longing.awesomeview.ui.components.CircleLoader
+import com.longing.awesomeview.ui.components.CornerBadgeBox
 import com.longing.awesomeview.ui.components.GenderSign
 import com.longing.awesomeview.ui.components.RainbowLoader
 import com.longing.awesomeview.ui.components.TypewriteText
@@ -154,6 +157,27 @@ fun HomeScreen() {
                         }
                     }
                 )
+            }
+            Spacer(modifier = Modifier.height(56.dp))
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround){
+                CornerBadgeBox(
+                    badgeBrush = SolidColor(Color(0xFFFFB907)),
+                    backBadgeBrush = SolidColor(Color(0xFFD9951C)),
+                    stripThickness = 32.dp,
+                    cornerPadding = 32.dp,
+                    contentPadding = 4.dp,
+                    cornerRoundness = 0.5f,
+                    corner = BadgeCorner.TopRight,
+                    badgeContent = {
+                        Text(
+                            text = "34% OFF",
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Medium,
+                        )
+                    }
+                ) {
+                   Box(Modifier.size(300.dp))
+                }
             }
         }
 
