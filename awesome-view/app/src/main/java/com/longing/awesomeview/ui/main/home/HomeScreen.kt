@@ -163,6 +163,7 @@ fun HomeScreen() {
                 CornerBadgeBox(
                     badgeBrush = SolidColor(Color(0xFFFFB907)),
                     backBadgeBrush = SolidColor(Color(0xFFD9951C)),
+                    Modifier.background(Color.Green),
                     stripThickness = 32.dp,
                     cornerPadding = 32.dp,
                     contentPadding = 4.dp,
@@ -176,7 +177,7 @@ fun HomeScreen() {
                         )
                     }
                 ) {
-                   Box(Modifier.size(300.dp))
+                   Box(Modifier.size(200.dp).background(Color.Red))
                 }
             }
         }

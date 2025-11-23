@@ -84,7 +84,7 @@ fun CornerBadgeBox(
                     .scale(corner.layoutScaleX, corner.layoutScaleY) // 根据角位置翻转
                     .graphicsLayer {
                         transformOrigin = TransformOrigin(0f, 1f) // 设置旋转中心
-                        rotationZ = 45f
+                        rotationZ = -45f
                     }
                     .background(badgeBrush, badgeShape)
             )
@@ -105,7 +105,7 @@ fun CornerBadgeBox(
         }
     ) { measurables, constraints ->
 
-        val mainContentPadding = contentPadding.toPx().roundToInt()
+        val mainContentPadding = contentPadding.toPx().roundToInt() + cornerPadding.roundToPx()
         // 为主内容创建一个新的约束，减去内边距
         val mainConstraints = constraints.copy(
             minWidth = 0,
@@ -116,18 +116,17 @@ fun CornerBadgeBox(
         val mainPlaceable = measurables.first { it.layoutId == LayoutId.MainContent }.measure(mainConstraints)
 
         // 2. 计算布局的最终尺寸
-        val width = if (constraints.hasBoundedWidth) constraints.maxWidth else mainPlaceable.width + mainContentPadding * 2
-        val height = if (constraints.hasBoundedHeight) constraints.maxHeight else mainPlaceable.height + mainContentPadding * 2
+        val width =
+            if (constraints.hasBoundedWidth) constraints.maxWidth else mainPlaceable.width + mainContentPadding * 2
+        val height =
+            if (constraints.hasBoundedHeight) constraints.maxHeight else mainPlaceable.height + mainContentPadding * 2
 
         // 3. 测量角标条 (Badge)
-        val badgeSize = (squareDiagonal(stripThickness + contentPadding)
-                + cornerPadding).roundToPx()
+        val badgeSize = (squareDiagonal(stripThickness + contentPadding) + cornerPadding).roundToPx()
 
         val badgeConstraints = constraints.copy(
-            minWidth = 0,
-            minHeight = 0,
-            maxWidth = badgeSize,
-            maxHeight = badgeSize
+            minWidth = badgeSize,
+            minHeight = stripThickness.roundToPx(),
         )
         val frontBadgePlaceable =
             measurables.first { it.layoutId == LayoutId.SideFrontBadge }.measure(badgeConstraints)
@@ -152,15 +151,18 @@ fun CornerBadgeBox(
         layout(width, height) {
             // 放置主内容，并应用内边距
             mainPlaceable.placeRelative(mainContentPadding, mainContentPadding)
-            val groupPosition = corner.alignment.align(
+            val (baseX, baseY) = corner.alignment.align(
                 size = IntSize.Zero,
-                space = IntSize(width, height),
+                space = IntSize(mainPlaceable.width, mainPlaceable.height),
                 layoutDirection = layoutDirection
             )
-
-            backBadgePlaceable.placeRelative(groupPosition)
-            badgeContentPlaceable.placeRelative(groupPosition)
-            frontBadgePlaceable.placeRelative(groupPosition)
+//
+//            backBadgePlaceable.placeRelative(groupPosition)
+//            badgeContentPlaceable.placeRelative(groupPosition)
+            frontBadgePlaceable.placeRelative(
+                mainContentPadding + baseX - frontBadgePlaceable.width + contentPadding.roundToPx(),
+                -contentPadding.roundToPx() + baseY + stripThickness.roundToPx() + cornerPadding.roundToPx()
+            )
 
         }
     }
