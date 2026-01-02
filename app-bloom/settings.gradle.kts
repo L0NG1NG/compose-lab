@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "Bloom"
-include ':app'
+rootProject.name = "app-bloom"
+include(":app")
