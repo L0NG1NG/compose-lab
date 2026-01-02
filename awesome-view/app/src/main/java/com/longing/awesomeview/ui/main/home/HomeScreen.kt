@@ -1,5 +1,6 @@
 package com.longing.awesomeview.ui.main.home
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -28,8 +30,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardCapitalization
@@ -37,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import com.longing.awesomeview.R
 import com.longing.awesomeview.ui.components.AnimatedGenderSign
 import com.longing.awesomeview.ui.components.BadgeCorner
 import com.longing.awesomeview.ui.components.CircleLoader
@@ -159,7 +166,7 @@ fun HomeScreen() {
                 )
             }
             Spacer(modifier = Modifier.height(56.dp))
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround){
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceAround) {
                 CornerBadgeBox(
                     badgeBrush = SolidColor(Color(0xFFFFB907)),
                     backBadgeBrush = SolidColor(Color(0xFFD9951C)),
@@ -176,7 +183,18 @@ fun HomeScreen() {
                         )
                     }
                 ) {
-                   Box(Modifier.size(300.dp))
+                    Box(
+                        Modifier
+                            .size(180.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(Color.Red)
+                    ) {
+                        Image(
+                            bitmap = ImageBitmap.imageResource(R.drawable.img_drawer_banner_2),
+                            contentDescription = null,
+                            contentScale = ContentScale.Crop
+                        )
+                    }
                 }
             }
         }
