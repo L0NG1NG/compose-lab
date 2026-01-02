@@ -3,10 +3,8 @@ package com.longing.bloom.ui
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -220,8 +218,7 @@ private fun BloomInfoSection() {
 private fun BottomBar() {
     NavigationBar(
         modifier = Modifier
-            .fillMaxWidth()
-            .height(56.dp),
+            .fillMaxWidth(),
         containerColor = pink100
     ) {
         navList.forEach {
