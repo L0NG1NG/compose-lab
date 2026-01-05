@@ -1,10 +1,24 @@
 package com.longing.mycalculator.exprk.internal
 
 import com.longing.mycalculator.exprk.ExpressionException
-import com.longing.mycalculator.exprk.internal.TokenType.*
+import com.longing.mycalculator.exprk.internal.TokenType.AMP_AMP
+import com.longing.mycalculator.exprk.internal.TokenType.BAR_BAR
+import com.longing.mycalculator.exprk.internal.TokenType.EQUAL_EQUAL
+import com.longing.mycalculator.exprk.internal.TokenType.EXPONENT
+import com.longing.mycalculator.exprk.internal.TokenType.GREATER
+import com.longing.mycalculator.exprk.internal.TokenType.GREATER_EQUAL
+import com.longing.mycalculator.exprk.internal.TokenType.LESS
+import com.longing.mycalculator.exprk.internal.TokenType.LESS_EQUAL
+import com.longing.mycalculator.exprk.internal.TokenType.MINUS
+import com.longing.mycalculator.exprk.internal.TokenType.MODULO
+import com.longing.mycalculator.exprk.internal.TokenType.NOT_EQUAL
+import com.longing.mycalculator.exprk.internal.TokenType.PLUS
+import com.longing.mycalculator.exprk.internal.TokenType.SLASH
+import com.longing.mycalculator.exprk.internal.TokenType.STAR
 import java.math.BigDecimal
 import java.math.MathContext
 import java.math.RoundingMode
+import java.util.Locale.getDefault
 
 internal class Evaluator : ExprVisitor<BigDecimal> {
     internal var mathContext: MathContext = MathContext.DECIMAL64
@@ -17,13 +31,13 @@ internal class Evaluator : ExprVisitor<BigDecimal> {
     }
 
     fun define(name: String, expr: Expr): Evaluator {
-        define(name.toLowerCase(), eval(expr))
+        define(name.lowercase(getDefault()), eval(expr))
 
         return this
     }
 
     fun addFunction(name: String, function: Function): Evaluator {
-        functions += name.toLowerCase() to function
+        functions += name.lowercase(getDefault()) to function
 
         return this
     }
@@ -90,7 +104,7 @@ internal class Evaluator : ExprVisitor<BigDecimal> {
     override fun visitCallExpr(expr: CallExpr): BigDecimal {
         val name = expr.name
         val function =
-            functions[name.toLowerCase()] ?: throw ExpressionException("Undefined function '$name'")
+            functions[name.lowercase(getDefault())] ?: throw ExpressionException("Undefined function '$name'")
 
         return function.call(expr.arguments.map { eval(it) })
     }
@@ -102,7 +116,7 @@ internal class Evaluator : ExprVisitor<BigDecimal> {
     override fun visitVariableExpr(expr: VariableExpr): BigDecimal {
         val name = expr.name.lexeme
 
-        return variables[name.toLowerCase()]
+        return variables[name.lowercase(getDefault())]
             ?: throw ExpressionException("Undefined variable '$name'")
     }
 
